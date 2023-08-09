@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('document_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('document_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('last_viewed_version')->constrained('versions');
+            $table->unsignedBigInteger('document_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('last_viewed_version');
             $table->timestamps();
         });
     }

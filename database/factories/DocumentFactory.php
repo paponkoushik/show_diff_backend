@@ -17,10 +17,9 @@ class DocumentFactory extends Factory
      */
     public function definition(): array
     {
-        $version = Version::query()->pluck('id')->toArray();
         return [
             'title' => fake()->text(20),
-            'current_version' => fake()->randomElement($version),
+            'current_version' => fake()->randomElement([1, 2]),
             'status' => fake()->randomElement(['active' ,'inactive']),
         ];
     }

@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('document_versions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('document_id')->constrained();
-            $table->foreignId('version')->constrained('versions');
+            $table->unsignedBigInteger('document_id');
+            $table->unsignedBigInteger('version');
             $table->json('body_content');
             $table->longText('tags_content');
             $table->timestamps();

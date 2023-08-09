@@ -18,11 +18,9 @@ class DocumentVersionFactory extends Factory
      */
     public function definition(): array
     {
-        $documentIds = Document::query()->take(500)->pluck('id')->toArray();
-        $version = Version::query()->pluck('id')->toArray();
         return [
-            'document_id' => fake()->randomElement($documentIds),
-            'version' => fake()->randomElement($version),
+            'document_id' => mt_rand(1, 1200),
+            'version' => fake()->randomElement([1, 2]),
             'body_content' => $this->getBodyContent(),
             'tags_content' => $this->tagsContent()
         ];

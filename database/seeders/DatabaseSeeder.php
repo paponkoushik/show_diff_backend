@@ -20,10 +20,26 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
          User::factory(300)->create();
-         Version::factory(3)->create();
-         Document::factory(1200)->create();
-         DocumentVersion::factory(2500)->create();
+
+         Version::factory(2)->create()->each(function ($version) {
+             Document::factory(250)->create(['current_version' => $version->id])
+                 ->each(function($document) use ($version) {
+                     DocumentVersion::factory(5)->create(['version' => $version->id]);
+                 });
+
+         });
+
+//         DocumentVersion::factory(2500)->create();
          DocumentUser::factory(8400)->create();
+
+
+
+//        User::factory(1)->create();
+//        Version::factory(3)->create();
+//        Document::factory(3)->create();
+//        DocumentVersion::factory(5)->create();
+//        DocumentUser::factory(5)->create();
+
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',

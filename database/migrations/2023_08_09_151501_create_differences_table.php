@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('differences', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->unsignedBigInteger('current_version');
-            $table->enum('status', ['active', 'inactive']);
+            $table->unsignedBigInteger('document_id');
+            $table->unsignedBigInteger('user_id');
+            $table->json('before_body_content');
+            $table->longText('before_tags_content');
+            $table->json('after_body_content');
+            $table->longText('after_tags_content');
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('differences');
     }
 };

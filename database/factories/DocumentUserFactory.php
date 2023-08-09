@@ -20,18 +20,10 @@ class DocumentUserFactory extends Factory
      */
     public function definition(): array
     {
-        $userIds = User::query()->take(500)->pluck('id')->toArray();
-
-        $documentIds = Document::query()->take(500)->pluck('id')->toArray();
-
-//        $documentId = fake()->randomElement($documentIds);
-//        $documentVersion = DocumentVersion::query()->whereIn('document_id', $documentIds)->pluck('version', 'document_id')->toArray();
-//
-        $version = Version::query()->pluck('id')->toArray();
         return [
-            'document_id' => fake()->randomElement($documentIds),
-            'user_id' => fake()->randomElement($userIds),
-            'last_viewed_version' => fake()->randomElement($version),
+            'document_id' => mt_rand(1, 1200),
+            'user_id' => mt_rand(1, 300),
+            'last_viewed_version' => fake()->randomElement([1, 2]),
         ];
     }
 }
