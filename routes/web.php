@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+    use App\Models\Document;
+    use App\Models\DocumentVersion;
+    use App\Models\User;
+    use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = User::query()->where('id', 1)->with('documents')->get();
+    dd($user);
 });

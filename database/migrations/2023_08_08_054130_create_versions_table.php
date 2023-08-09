@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('document_users', function (Blueprint $table) {
+        Schema::create('versions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('document_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('last_viewed_version')->constrained('versions');
+            $table->string('title');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('document_users');
+        Schema::dropIfExists('versions');
     }
 };

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('current_version');
+            $table->foreignId('current_version')->constrained('versions');
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });

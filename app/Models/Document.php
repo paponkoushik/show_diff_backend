@@ -6,6 +6,7 @@ use App\Enums\DocumentStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Document extends Model
 {
@@ -18,7 +19,6 @@ class Document extends Model
     ];
 
     protected $casts = [
-        'email_verified_at' => 'datetime',
 //        'status' => DocumentStatusEnum::class,
     ];
 
@@ -27,5 +27,10 @@ class Document extends Model
         return $this->belongsToMany(User::class, 'document_users', 'document_id','user_id')
             ->using(DocumentUser::class)
             ->withPivot( 'id', 'last_viewed_version');
+    }
+
+    public function documentVersions(): HasMany
+    {
+        return $this->hasMany( DocumentVersion::class );
     }
 }
